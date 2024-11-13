@@ -83,4 +83,19 @@ void loop() {
   // Sauvegarde de l'image sur la carte SD
   File file = SD_MMC.open(path.c_str(), FILE_WRITE);
   if (!file) {
-    Serial.println("Échec de l'ouvertu
+    Serial.println("Échec de l'ouverture du fichier pour l'écriture");
+    esp_camera_fb_return(fb);
+    return;
+  }
+
+  // Ecriture des données de l'image dans le fichier
+  file.write(fb->buf, fb->len);
+  Serial.printf("Photo sauvegardée : %s\n", path.c_str());
+
+  // Fermeture du fichier et libération de la mémoire
+  file.close();
+  esp_camera_fb_return(fb);
+
+  // Attente avant la prochaine capture (par exemple, 10 secondes)
+  delay(10000);
+}
