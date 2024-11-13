@@ -20,6 +20,8 @@
 #define HREF_GPIO_NUM    23
 #define PCLK_GPIO_NUM    22
 
+static int photoCounter = 0;
+
 void setup() {
   // Initialisation du port série
   Serial.begin(115200);
@@ -78,7 +80,9 @@ void loop() {
   }
 
   // Création d'un nom de fichier unique
-  String path = "/photo" + String(millis()) + ".jpg";
+  //unsigned long minutes = millis() / 60000;
+  //String path = "/photo" + String(minutes) + ".jpg";
+  String path = "/photo" + String(photoCounter++) + ".jpg";
 
   // Sauvegarde de l'image sur la carte SD
   File file = SD_MMC.open(path.c_str(), FILE_WRITE);
