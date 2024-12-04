@@ -6,6 +6,8 @@
 const char* ssid = "Redmi_Note_10_Pro";
 const char* password = "programmation";
 
+
+
 void setup() {
 
   //CONNEXION WIFI
